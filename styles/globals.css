@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+.dark {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-beige-50 text-ink antialiased;
+  transition: background-color 0.45s ease, color 0.45s ease;
+}
+.dark body {
+  @apply bg-charcoal-950 text-beige-50/90;
+}
+
+/* Theme transition on common surfaces */
+.surface,
+.card,
+header,
+nav {
+  transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-forest-900/10 bg-white shadow-card dark:border-beige-50/10 dark:bg-charcoal-900;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all active:scale-[0.98] disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-forest-700 text-beige-50 hover:bg-forest-600 dark:bg-forest-500 dark:text-charcoal-950 dark:hover:bg-forest-400;
+  }
+  .btn-gold {
+    @apply btn bg-gold-400 text-ink hover:bg-gold-300 dark:text-charcoal-950;
+  }
+  .btn-ghost {
+    @apply btn border border-forest-900/15 bg-transparent text-ink hover:bg-forest-50 dark:border-beige-50/15 dark:text-beige-50/90 dark:hover:bg-charcoal-800;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-forest-600 dark:text-gold-300;
+  }
+  .input {
+    @apply w-full rounded-xl border border-forest-900/15 bg-white px-3.5 py-2.5 text-sm outline-none transition focus:border-forest-500 focus:ring-2 focus:ring-forest-500/20 dark:border-beige-50/15 dark:bg-charcoal-800 dark:text-beige-50;
+  }
+}
+
+/* Goshuin (temple stamp) seal — the app's signature mark, used for badges & Nikko Coin */
+.seal {
+  @apply relative inline-flex items-center justify-center rounded-full;
+  background: radial-gradient(circle at 35% 30%, #d9ad4f, #b6892c 70%);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35), 0 2px 6px rgba(120, 88, 20, 0.35);
+}
+
+::selection {
+  @apply bg-gold-300/60 text-ink;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:root {
+  --font-display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --font-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, -apple-system, sans-serif;
+  --font-jp: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
