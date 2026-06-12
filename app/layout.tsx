@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { AppProvider } from "@/lib/providers";
 import { BottomNav, TopNav } from "@/components/Navbar";
 import { MascotAssistant } from "@/components/Mascot";
+import { PageMascot } from "@/components/PageMascot";
 
 export const metadata: Metadata = {
   title: "Nikko Passport — 日光パスポート",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <TopNav />
           <main className="mx-auto max-w-6xl px-4 pb-24 pt-6 md:pb-12">{children}</main>
           <MascotAssistant />
+          <PageMascot />
           <BottomNav />
         </AppProvider>
       </body>

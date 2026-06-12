@@ -63,6 +63,25 @@ nav {
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35), 0 2px 6px rgba(120, 88, 20, 0.35);
 }
 
+/* Okunikko-chan cursor — the mascot follows your pointer everywhere.
+   Hotspot is the face centre; browsers without SVG cursor support
+   (e.g. Safari) fall back to the system cursor. */
+body {
+  cursor: url("/cursor-salamander.svg") 14 13, auto;
+}
+a,
+button,
+[role="button"],
+label,
+select,
+summary {
+  cursor: url("/cursor-salamander-happy.svg") 14 13, pointer;
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea {
+  cursor: text;
+}
+
 ::selection {
   @apply bg-gold-300/60 text-ink;
 }

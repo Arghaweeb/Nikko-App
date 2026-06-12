@@ -7,70 +7,126 @@ import { useApp } from "@/lib/providers";
 import { formatDate } from "@/lib/utils";
 
 /**
- * Nikko Salamander — the app's guide and notification assistant.
- * Inspired by the Japanese giant salamander: dark body, crimson gill tufts,
- * drawn as animated SVG (no raster assets). Elegant, not cartoonish.
+ * Okunikko-chan (おくにっこちゃん) — the Oku-Nikko salamander mascot.
+ * Chubby black axolotl with fluffy crimson gill tufts and a friendly
+ * open-mouthed smile, drawn as animated SVG (no raster assets).
  */
-export function SalamanderFigure({ size = 72, wave = false }: { size?: number; wave?: boolean }) {
+function GillTuft({ cx, cy, angle }: { cx: number; cy: number; angle: number }) {
+  // A fluffy tuft built from overlapping circles, rotated outward from the head.
+  return (
+    <g transform={`rotate(${angle} ${cx} ${cy})`}>
+      <circle cx={cx - 5} cy={cy} r="4.5" fill="#9c2e3f" />
+      <circle cx={cx} cy={cy} r="5" fill="#b03a48" />
+      <circle cx={cx + 5} cy={cy - 1} r="4" fill="#c44456" />
+      <circle cx={cx + 9} cy={cy - 2} r="2.8" fill="#d4566a" />
+    </g>
+  );
+}
+
+export function SalamanderFigure({
+  size = 72,
+  wave = false,
+  walking = false,
+}: {
+  size?: number;
+  wave?: boolean;
+  walking?: boolean;
+}) {
   return (
     <motion.svg
       width={size}
       height={size}
-      viewBox="0 0 96 96"
+      viewBox="0 0 120 120"
       initial={false}
-      animate={wave ? { rotate: [0, -4, 4, -2, 0] } : { rotate: 0 }}
-      transition={{ duration: 1.4, ease: "easeInOut" }}
+      animate={
+        walking
+          ? { rotate: [0, -4, 0, 4, 0], y: [0, -3, 0, -3, 0] }
+          : wave
+            ? { rotate: [0, -3, 3, -2, 0] }
+            : { rotate: 0, y: 0 }
+      }
+      transition={
+        walking
+          ? { repeat: Infinity, duration: 0.9, ease: "easeInOut" }
+          : { duration: 1.4, ease: "easeInOut" }
+      }
       aria-hidden="true"
     >
-      {/* tail */}
+      {/* tail — chubby curl, gently swishing */}
       <motion.path
-        d="M60 70 q22 4 26 -12 q-14 2 -20 -2"
+        d="M82 88 q20 4 26 -16 q-12 6 -18 0 q4 10 -8 16"
         fill="#23282b"
-        animate={{ rotate: [0, 3, 0, -3, 0] }}
-        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-        style={{ originX: "60px", originY: "70px" }}
+        animate={{ rotate: [0, 5, 0, -3, 0] }}
+        transition={{ repeat: Infinity, duration: 3.6, ease: "easeInOut" }}
+        style={{ originX: "82px", originY: "88px" }}
       />
-      {/* body */}
-      <ellipse cx="44" cy="60" rx="26" ry="20" fill="#2b3134" />
-      {/* belly sheen */}
-      <ellipse cx="40" cy="66" rx="16" ry="10" fill="#3a4145" opacity="0.7" />
-      {/* head */}
-      <ellipse cx="40" cy="38" rx="22" ry="18" fill="#2b3134" />
-      {/* gill tufts */}
-      <g fill="#b03a48">
-        <motion.g animate={{ rotate: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 3 }} style={{ originX: "20px", originY: "30px" }}>
-          <ellipse cx="17" cy="28" rx="7" ry="3.5" transform="rotate(-30 17 28)" />
-          <ellipse cx="15" cy="34" rx="7" ry="3.5" transform="rotate(-8 15 34)" />
-          <ellipse cx="16" cy="40" rx="7" ry="3.5" transform="rotate(16 16 40)" />
-        </motion.g>
-        <motion.g animate={{ rotate: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 3.4 }} style={{ originX: "62px", originY: "30px" }}>
-          <ellipse cx="63" cy="28" rx="7" ry="3.5" transform="rotate(30 63 28)" />
-          <ellipse cx="65" cy="34" rx="7" ry="3.5" transform="rotate(8 65 34)" />
-          <ellipse cx="64" cy="40" rx="7" ry="3.5" transform="rotate(-16 64 40)" />
-        </motion.g>
-      </g>
-      {/* eyes */}
-      <circle cx="33" cy="36" r="3.4" fill="#0d0f10" />
-      <circle cx="47" cy="36" r="3.4" fill="#0d0f10" />
-      <circle cx="34.2" cy="34.8" r="1.1" fill="#fff" />
-      <circle cx="48.2" cy="34.8" r="1.1" fill="#fff" />
-      {/* smile */}
-      <path d="M30 45 q10 8 20 0" stroke="#e7a4ab" strokeWidth="3" fill="none" strokeLinecap="round" />
-      {/* arm (waves) */}
-      <motion.ellipse
-        cx="66"
-        cy="56"
-        rx="6"
-        ry="10"
-        fill="#2b3134"
-        animate={wave ? { rotate: [0, 35, 0, 35, 0] } : { rotate: 0 }}
-        transition={{ duration: 1.6 }}
-        style={{ originX: "64px", originY: "62px" }}
-      />
-      <ellipse cx="24" cy="62" rx="6" ry="10" fill="#2b3134" />
-      {/* gold seal on belly — ties mascot to the goshuin signature */}
-      <circle cx="44" cy="64" r="5" fill="#d9ad4f" opacity="0.9" />
-      <path d="M44 61 l1 2 2 .3 -1.5 1.4 .4 2 -1.9 -1 -1.9 1 .4 -2 -1.5 -1.4 2 -.3 Z" fill="#7a5a14" />
+      {/* legs */}
+      <ellipse cx="46" cy="102" rx="9" ry="10" fill="#262b2e" />
+      <ellipse cx="72" cy="102" rx="9" ry="10" fill="#262b2e" />
+      {/* body — chubby & compact, idle breathing squash */}
+      <motion.g
+        animate={{ scaleY: [1, 0.985, 1] }}
+        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+        style={{ originX: "58px", originY: "100px" }}
+      >
+        <ellipse cx="58" cy="82" rx="30" ry="24" fill="#2b3134" />
+        <ellipse cx="56" cy="89" rx="18" ry="12" fill="#3a4145" opacity="0.6" />
+        {/* left arm */}
+        <ellipse cx="31" cy="80" rx="7" ry="12" fill="#2b3134" transform="rotate(14 31 80)" />
+        {/* right arm — waves hello */}
+        <motion.ellipse
+          cx="85"
+          cy="80"
+          rx="7"
+          ry="12"
+          fill="#2b3134"
+          animate={wave ? { rotate: [-14, -60, -14, -60, -14] } : { rotate: -14 }}
+          transition={{ duration: 1.6 }}
+          style={{ originX: "85px", originY: "88px" }}
+        />
+        {/* gold goshuin seal on belly */}
+        <circle cx="58" cy="86" r="5.5" fill="#d9ad4f" opacity="0.9" />
+        <path d="M58 82.6 l1.1 2.2 2.2 .35 -1.65 1.55 .45 2.2 -2.1 -1.1 -2.1 1.1 .45 -2.2 -1.65 -1.55 2.2 -.35 Z" fill="#7a5a14" />
+      </motion.g>
+      {/* gill tufts — fluffy crimson, swaying like underwater */}
+      <motion.g
+        animate={{ rotate: [0, 5, 0] }}
+        transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
+        style={{ originX: "30px", originY: "40px" }}
+      >
+        <GillTuft cx={24} cy={26} angle={-145} />
+        <GillTuft cx={20} cy={38} angle={178} />
+        <GillTuft cx={24} cy={50} angle={150} />
+      </motion.g>
+      <motion.g
+        animate={{ rotate: [0, -5, 0] }}
+        transition={{ repeat: Infinity, duration: 3.1, ease: "easeInOut" }}
+        style={{ originX: "86px", originY: "40px" }}
+      >
+        <GillTuft cx={92} cy={26} angle={-35} />
+        <GillTuft cx={96} cy={38} angle={2} />
+        <GillTuft cx={92} cy={50} angle={30} />
+      </motion.g>
+      {/* head — big and round */}
+      <ellipse cx="58" cy="42" rx="31" ry="27" fill="#2e3437" />
+      <ellipse cx="50" cy="32" rx="14" ry="9" fill="#3a4145" opacity="0.45" />
+      {/* eyes with blink */}
+      <motion.g
+        animate={{ scaleY: [1, 1, 0.08, 1, 1] }}
+        transition={{ repeat: Infinity, duration: 4.6, times: [0, 0.46, 0.5, 0.54, 1] }}
+        style={{ originX: "58px", originY: "39px" }}
+      >
+        <circle cx="45" cy="39" r="4.6" fill="#0d0f10" />
+        <circle cx="71" cy="39" r="4.6" fill="#0d0f10" />
+        <circle cx="46.4" cy="37.4" r="1.5" fill="#fff" />
+        <circle cx="72.4" cy="37.4" r="1.5" fill="#fff" />
+      </motion.g>
+      {/* blush */}
+      <ellipse cx="37" cy="50" rx="5" ry="3" fill="#e58a96" opacity="0.4" />
+      <ellipse cx="79" cy="50" rx="5" ry="3" fill="#e58a96" opacity="0.4" />
+      {/* friendly open-mouth smile with soft pink */}
+      <path d="M44 50 q14 13 28 0 q-1.5 13 -14 13 q-12.5 0 -14 -13 Z" fill="#1a1d1f" />
+      <path d="M48 56 q10 8 20 0 q-2 5.5 -10 5.5 q-8 0 -10 -5.5 Z" fill="#ef9aa6" />
     </motion.svg>
   );
 }
