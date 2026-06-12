@@ -113,6 +113,8 @@ const ja: Dict = {
   "wallet.notConnected": "ライトニングウォレットを接続すると、日光全域で送受金できます。",
   "wallet.copy": "インボイスをコピー",
   "wallet.copied": "コピーしました",
+  "wallet.insufficientForFee": "金額とネットワーク手数料の合計が残高を超えています。",
+  "wallet.maxSend": "送金上限",
 
   "coin.name": "日光コイン",
   "coin.symbol": "NKO",

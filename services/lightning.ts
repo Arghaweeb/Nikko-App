@@ -5,6 +5,7 @@
  */
 
 const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+export const MAX_MOCK_FEE_SATS = 3;
 
 function randomBech32(length: number): string {
   let out = "";
@@ -37,7 +38,7 @@ export function createInvoice(sats: number, memo: string): MockInvoice {
 export function settle(): Promise<{ feeSats: number; preimage: string }> {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({ feeSats: Math.max(1, Math.floor(Math.random() * 4)), preimage: randomBech32(32) });
+      resolve({ feeSats: Math.max(1, Math.floor(Math.random() * (MAX_MOCK_FEE_SATS + 1))), preimage: randomBech32(32) });
     }, 1200 + Math.random() * 800);
   });
 }

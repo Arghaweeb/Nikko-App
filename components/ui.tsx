@@ -6,12 +6,26 @@ import type { Review, TourismTheme } from "@/types";
 import { useApp } from "@/lib/providers";
 import { L, cn, formatDate } from "@/lib/utils";
 
-export function SectionTitle({ eyebrow, title, action }: { eyebrow?: string; title: string; action?: React.ReactNode }) {
+export function SectionTitle({
+  eyebrow,
+  title,
+  action,
+  level = 2,
+}: {
+  eyebrow?: string;
+  title: string;
+  action?: React.ReactNode;
+  level?: 1 | 2;
+}) {
+  const Heading = level === 1 ? "h1" : "h2";
+
   return (
     <div className="mb-4 flex items-end justify-between gap-4">
       <div>
         {eyebrow && <p className="eyebrow mb-1">{eyebrow}</p>}
-        <h2 className="font-display text-xl font-semibold tracking-tight md:text-2xl">{title}</h2>
+        <Heading className={level === 1 ? "font-display text-3xl font-semibold tracking-tight" : "font-display text-xl font-semibold tracking-tight md:text-2xl"}>
+          {title}
+        </Heading>
       </div>
       {action}
     </div>

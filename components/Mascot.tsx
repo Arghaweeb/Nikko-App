@@ -150,7 +150,7 @@ export function MascotAssistant() {
   if (!hydrated || dismissed) return null;
 
   return (
-    <div className="fixed bottom-20 right-4 z-40 flex flex-col items-end gap-2 md:bottom-6">
+    <div className="fixed bottom-6 right-4 z-40 hidden flex-col items-end gap-2 xl:flex">
       <AnimatePresence>
         {open && (
           <motion.div

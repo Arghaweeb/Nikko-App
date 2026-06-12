@@ -1,9 +1,24 @@
 import type { Metadata, Viewport } from "next";
+import { Shippori_Mincho, Zen_Kaku_Gothic_New } from "next/font/google";
 import "@/styles/globals.css";
 import { AppProvider } from "@/lib/providers";
 import { BottomNav, TopNav } from "@/components/Navbar";
 import { MascotAssistant } from "@/components/Mascot";
 import { PageMascot } from "@/components/PageMascot";
+
+const displayFont = Shippori_Mincho({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const bodyFont = Zen_Kaku_Gothic_New({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Nikko Passport — 日光パスポート",
@@ -20,22 +35,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
       <head>
-        {/* Display & body faces: Shippori Mincho (display serif) + Zen Kaku Gothic New (body).
-            Loaded at runtime so offline builds still succeed; system JP stacks are the fallback. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
       </head>
       <body className="font-sans">
         <AppProvider>
           <TopNav />
-          <main className="mx-auto max-w-6xl px-4 pb-24 pt-6 md:pb-12">{children}</main>
+          <main className="mx-auto max-w-6xl px-4 pb-24 pt-6 xl:pb-12">{children}</main>
           <MascotAssistant />
           <PageMascot />
           <BottomNav />

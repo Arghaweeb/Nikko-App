@@ -47,7 +47,7 @@ export function PageMascot() {
   if (!hydrated || phase === "gone") return null;
 
   return (
-    <div className="pointer-events-none fixed bottom-16 left-2 z-30 md:bottom-4" aria-hidden="true">
+    <div className="pointer-events-none fixed bottom-16 left-2 z-30 xl:bottom-4" aria-hidden="true">
       <AnimatePresence>
         <motion.div
           key={pathname}

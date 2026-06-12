@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { useApp } from "@/lib/providers";
 import { lightningWallets } from "@/lib/data";
-import { createInvoice, settle, type MockInvoice } from "@/services/lightning";
+import { createInvoice, MAX_MOCK_FEE_SATS, settle, type MockInvoice } from "@/services/lightning";
 import { RATES, fmt, satsToCoin, satsToJpy } from "@/services/rates";
 import { L, formatDate } from "@/lib/utils";
 import { CoinSeal, QrPattern, SectionTitle, StatCard } from "@/components/ui";
@@ -34,6 +34,9 @@ export default function WalletPage() {
   const [copied, setCopied] = useState(false);
 
   const amt = Math.max(0, Math.floor(Number(amount) || 0));
+  const maxSpendable = Math.max(0, sats - MAX_MOCK_FEE_SATS);
+  const amountExceedsBalance = amt > maxSpendable;
+  const canSend = amt > 0 && !amountExceedsBalance;
 
   const resetFlow = () => {
     setFlow("idle");
@@ -45,13 +48,19 @@ export default function WalletPage() {
   };
 
   const startSendConfirm = () => {
-    if (amt <= 0 || amt > sats) return;
+    if (!canSend) return;
     setFlow("sendConfirm");
   };
 
   const confirmSend = async () => {
     setFlow("sending");
     const { feeSats } = await settle();
+    if (amt + feeSats > sats) {
+      setLastFee(feeSats);
+      notify(t("wallet.insufficientForFee"), "info");
+      setFlow("send");
+      return;
+    }
     const earned = pay(amt, memo || "Lightning payment", invoiceInput ? "invoice" : "nikko-merchant@pay.nikko.jp", feeSats);
     setLastFee(feeSats);
     setLastEarned(earned);
@@ -87,7 +96,7 @@ export default function WalletPage() {
   if (!walletName) {
     return (
       <div className="space-y-8 py-6">
-        <SectionTitle eyebrow={t("nav.wallet")} title={t("wallet.title")} />
+        <SectionTitle eyebrow={t("nav.wallet")} title={t("wallet.title")} level={1} />
         <p className="-mt-5 max-w-xl text-sm opacity-75">{t("wallet.subtitle")}</p>
 
         <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="card mx-auto max-w-md p-6 text-center">
@@ -118,6 +127,7 @@ export default function WalletPage() {
       <SectionTitle
         eyebrow={t("nav.wallet")}
         title={t("wallet.title")}
+        level={1}
         action={
           <button onClick={disconnectWallet} className="btn btn-ghost text-xs">
             <Unplug size={14} /> {t("wallet.disconnect")}
@@ -183,8 +193,13 @@ export default function WalletPage() {
                 ≈ ¥{fmt(satsToJpy(amt))} · +{satsToCoin(amt)} {t("coin.symbol")}
               </p>
             )}
+            {amountExceedsBalance && (
+              <p className="text-xs font-medium text-red-700 dark:text-red-300">
+                {t("wallet.insufficientForFee")} {t("wallet.maxSend")}: {fmt(maxSpendable)} {t("common.sats")}.
+              </p>
+            )}
             <div className="flex gap-2">
-              <button onClick={startSendConfirm} disabled={amt <= 0 || amt > sats} className="btn btn-primary flex-1 disabled:opacity-40">
+              <button onClick={startSendConfirm} disabled={!canSend} className="btn btn-primary flex-1 disabled:opacity-40">
                 {t("wallet.send")}
               </button>
               <button onClick={resetFlow} className="btn btn-ghost">
