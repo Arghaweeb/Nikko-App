@@ -120,6 +120,8 @@ const en = {
   "wallet.notConnected": "Connect a Lightning wallet to send and receive payments across Nikko.",
   "wallet.copy": "Copy invoice",
   "wallet.copied": "Copied",
+  "wallet.insufficientForFee": "Amount plus network fee exceeds your balance.",
+  "wallet.maxSend": "Max send",
 
   // Nikko Coin
   "coin.name": "Nikko Coin",

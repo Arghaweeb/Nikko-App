@@ -59,7 +59,7 @@ export default function RewardsPage() {
 
   return (
     <div className="space-y-8 py-6">
-      <SectionTitle eyebrow={t("nav.rewards")} title={t("rewards.title")} />
+      <SectionTitle eyebrow={t("nav.rewards")} title={t("rewards.title")} level={1} />
       <p className="-mt-5 max-w-xl text-sm opacity-75">{t("rewards.subtitle")}</p>
 
       <div className="grid gap-4 sm:grid-cols-3">

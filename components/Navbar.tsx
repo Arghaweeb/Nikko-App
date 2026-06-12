@@ -48,7 +48,7 @@ export function TopNav() {
           <span className="font-display text-lg font-semibold tracking-tight">{t("brand.name")}</span>
         </Link>
 
-        <nav className="ml-4 hidden flex-1 items-center gap-1 md:flex" aria-label="Primary">
+        <nav className="ml-4 hidden flex-1 items-center gap-1 xl:flex" aria-label="Primary">
           {links.map(({ href, key, icon: Icon }) => {
             const active = isActive(pathname, href);
             return (
@@ -102,7 +102,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Primary mobile"
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-forest-900/10 bg-beige-50/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md dark:border-beige-50/10 dark:bg-charcoal-950/95 md:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-forest-900/10 bg-beige-50/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md dark:border-beige-50/10 dark:bg-charcoal-950/95 xl:hidden"
     >
       <div className="mx-auto grid max-w-md grid-cols-5">
         {mobileLinks.map(({ href, key, icon: Icon }) => {

@@ -43,7 +43,7 @@ export default function ExperiencesPage() {
 
   return (
     <div className="space-y-8 py-6">
-      <SectionTitle eyebrow={t("nav.experiences")} title={t("experiences.title")} />
+      <SectionTitle eyebrow={t("nav.experiences")} title={t("experiences.title")} level={1} />
       <p className="-mt-5 max-w-xl text-sm opacity-75">{t("experiences.subtitle")}</p>
 
       <ThemePicker compact />

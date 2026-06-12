@@ -15,7 +15,6 @@ export function useLocalStorage<T>(key: string, initial: T) {
       /* ignore corrupt storage */
     }
     setHydrated(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
   useEffect(() => {

@@ -18,7 +18,7 @@ export default function ProfilePage() {
 
   return (
     <div className="space-y-8 py-6">
-      <SectionTitle eyebrow={t("nav.profile")} title={t("profile.title")} />
+      <SectionTitle eyebrow={t("nav.profile")} title={t("profile.title")} level={1} />
 
       {/* Traveler card */}
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="card flex items-center gap-4 p-5">
