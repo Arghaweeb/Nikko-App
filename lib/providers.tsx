@@ -1,9 +1,9 @@
 "use client";
 
 import React, { createContext, useCallback, useContext, useMemo } from "react";
-import type { Lang, LightningTx, Reservation, ThemeMode, TourismTheme } from "@/types";
+import type { Lang, LightningTx, Reservation, SocialKind, SocialPost, ThemeMode, TourismTheme } from "@/types";
 import { translate, type TKey } from "@/locales";
-import { initialReservations, initialTransactions } from "@/lib/data";
+import { initialReservations, initialSocialPosts, initialTransactions } from "@/lib/data";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 /* --------------------------------- Types ---------------------------------- */
@@ -55,6 +55,13 @@ interface AppState {
   notifications: Notification[];
   notify: (text: string, kind: Notification["kind"]) => void;
 
+  // community / social
+  posts: SocialPost[];
+  likedPosts: string[];
+  toggleLike: (postId: string) => void;
+  addPost: (input: { title: string; body: string; kind: SocialKind }) => SocialPost;
+  addComment: (postId: string, text: string) => void;
+
   hydrated: boolean;
 }
 
@@ -76,6 +83,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [redeemed, setRedeemed] = useLocalStorage<string[]>("np.redeemed", []);
   const [reservations, setReservations] = useLocalStorage<Reservation[]>("np.res", initialReservations);
   const [notifications, setNotifications] = useLocalStorage<Notification[]>("np.notifs", []);
+  const [posts, setPosts] = useLocalStorage<SocialPost[]>("np.posts", initialSocialPosts);
+  const [likedPosts, setLikedPosts] = useLocalStorage<string[]>("np.liked", []);
 
   const t = useCallback((key: TKey) => translate(lang, key), [lang]);
 
@@ -186,6 +195,70 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     [setReservations, notify]
   );
 
+  const toggleLike = useCallback(
+    (postId: string) => {
+      let nowLiked = false;
+      setLikedPosts((prev) => {
+        if (prev.includes(postId)) {
+          return prev.filter((id) => id !== postId);
+        }
+        nowLiked = true;
+        return [...prev, postId];
+      });
+      setPosts((prev) =>
+        prev.map((p) => (p.id === postId ? { ...p, likes: Math.max(0, p.likes + (nowLiked ? 1 : -1)) } : p))
+      );
+    },
+    [setLikedPosts, setPosts]
+  );
+
+  const addPost = useCallback(
+    ({ title, body, kind }: { title: string; body: string; kind: SocialKind }): SocialPost => {
+      const post: SocialPost = {
+        id: `post-${Date.now()}`,
+        author: translate(lang, "community.you"),
+        kind,
+        themes: [theme],
+        title: { en: title, ja: title },
+        body: { en: body, ja: body },
+        spots: [],
+        date: new Date().toISOString().slice(0, 10),
+        likes: 0,
+        comments: [],
+        art: {
+          hues: theme === "food" ? [35, 95] : theme === "heritage" ? [350, 40] : [205, 160],
+          variant: theme === "food" ? "town" : theme === "heritage" ? "shrine" : "lake",
+        },
+      };
+      setPosts((prev) => [post, ...prev]);
+      notify(translate(lang, "community.posted"), "info");
+      return post;
+    },
+    [lang, theme, setPosts, notify]
+  );
+
+  const addComment = useCallback(
+    (postId: string, text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed) return;
+      const author = translate(lang, "community.you");
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === postId
+            ? {
+                ...p,
+                comments: [
+                  ...p.comments,
+                  { id: `c-${Date.now()}`, author, text: trimmed, date: new Date().toISOString().slice(0, 10) },
+                ],
+              }
+            : p
+        )
+      );
+    },
+    [lang, setPosts]
+  );
+
   const value = useMemo<AppState>(
     () => ({
       lang,
@@ -213,9 +286,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       addReservation,
       notifications,
       notify,
+      posts,
+      likedPosts,
+      toggleLike,
+      addPost,
+      addComment,
       hydrated,
     }),
-    [lang, setLang, t, mode, toggleMode, theme, setTheme, walletName, connectWallet, disconnectWallet, sats, transactions, pay, receive, coin, spendCoin, addCoin, eco, addEco, redeemed, markRedeemed, reservations, addReservation, notifications, notify, hydrated]
+    [lang, setLang, t, mode, toggleMode, theme, setTheme, walletName, connectWallet, disconnectWallet, sats, transactions, pay, receive, coin, spendCoin, addCoin, eco, addEco, redeemed, markRedeemed, reservations, addReservation, notifications, notify, posts, likedPosts, toggleLike, addPost, addComment, hydrated]
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

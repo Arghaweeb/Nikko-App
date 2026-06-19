@@ -1,12 +1,19 @@
 import type {
   Attraction,
   Badge,
+  CrowdLevel,
   Experience,
+  FoliageReport,
   Hotel,
   LightningTx,
+  LocalEvent,
   RedeemOption,
   Reservation,
   Restaurant,
+  ShrineHours,
+  SocialPost,
+  TransitDeparture,
+  WeatherSnapshot,
 } from "@/types";
 
 /* ---------------------------------- Hotels --------------------------------- */
@@ -33,7 +40,7 @@ export const hotels: Hotel[] = [
     earnRate: 320,
     art: { hues: [205, 150], variant: "bridge" },
     bookingLinks: [
-      { label: "Official Website", url: "https://www.nikko-kanaya-hotel.co.jp/" },
+      { label: "Official Website", url: "https://www.kanayahotel.co.jp/en/nkh/" },
       { label: "Booking.com", url: "https://www.booking.com/" },
       { label: "Rakuten Travel", url: "https://travel.rakuten.co.jp/" },
       { label: "Jalan", url: "https://www.jalan.net/" },
@@ -209,7 +216,7 @@ export const restaurants: Restaurant[] = [
     art: { hues: [95, 45], variant: "town" },
     reserveLinks: [
       { label: "Official Website", url: "https://www.nikko-kankou.org/" },
-      { label: "Reservation inquiry", url: "https://www.nikko-kankou.org/contact/" },
+      { label: "Reservation inquiry", url: "https://www.visitnikko.jp/en/plan-your-trip/tourist-information/" },
     ],
     reviews: [
       {
@@ -762,4 +769,321 @@ export const lightningWallets = [
   { id: "alby", name: "Alby" },
   { id: "breez", name: "Breez" },
   { id: "blink", name: "Blink" },
+];
+
+/* --------------------------------- Social --------------------------------- */
+
+export const initialSocialPosts: SocialPost[] = [
+  {
+    id: "post-1",
+    author: "Mei L.",
+    nationality: { en: "Taiwan", ja: "台湾" },
+    kind: "itinerary",
+    themes: ["nature", "heritage"],
+    title: {
+      en: "Two-day slow Nikko: shrines, marsh, lake",
+      ja: "ゆっくり日光 二日間：社寺・湿原・湖",
+    },
+    body: {
+      en: "Day 1: cedar avenue walk → Tōshōgū → Rinnōji at dusk. Day 2: dawn marsh boardwalk, then kayak Chūzenji. Paid every bus and meal with Lightning — wallet barely noticed.",
+      ja: "1日目：杉並木を歩いて東照宮、夕暮れに輪王寺。2日目：夜明けの戦場ヶ原、中禅寺湖でカヤック。バスも食事もライトニングで支払い、財布いらず。",
+    },
+    spots: ["toshogu", "rinnoji", "senjogahara", "lake-chuzenji"],
+    date: "2026-06-08",
+    likes: 124,
+    comments: [
+      {
+        id: "c1",
+        author: "Akira S.",
+        text: "Cedar avenue at sunrise is the secret. Thank you for the loop tip!",
+        date: "2026-06-09",
+      },
+      {
+        id: "c2",
+        author: "Sam W.",
+        text: "Did this last week. The dawn marsh part is unreal.",
+        date: "2026-06-10",
+      },
+    ],
+    art: { hues: [205, 160], variant: "shrine" },
+  },
+  {
+    id: "post-2",
+    author: "Priya S.",
+    nationality: { en: "India", ja: "インド" },
+    kind: "photo",
+    themes: ["nature"],
+    title: {
+      en: "Morning mist over Lake Chūzenji",
+      ja: "中禅寺湖の朝霧",
+    },
+    body: {
+      en: "Ten steps from the lodge door, kayak on the rack, lake to myself. The eco points were a bonus — the silence was the prize.",
+      ja: "ロッジから10歩、ラックのカヤック、湖は独り占め。エコポイントはおまけ、本当のごほうびは静けさでした。",
+    },
+    spots: ["chuzenji-lakeside", "lake-chuzenji"],
+    date: "2026-06-04",
+    likes: 318,
+    comments: [
+      {
+        id: "c3",
+        author: "Tom H.",
+        text: "Saving this for next spring. Which lodge did you stay at?",
+        date: "2026-06-05",
+      },
+    ],
+    art: { hues: [215, 180], variant: "lake" },
+  },
+  {
+    id: "post-3",
+    author: "Jonas F.",
+    nationality: { en: "Sweden", ja: "スウェーデン" },
+    kind: "tip",
+    themes: ["food", "heritage"],
+    title: {
+      en: "Lightning-friendly cafés around the shrine route",
+      ja: "社寺ルート周辺のライトニング対応カフェ",
+    },
+    body: {
+      en: "Kissa Raiden, Irodori Market Kitchen, and the soba counter at Mizuoto all took sats. Tap, ten seconds, done.",
+      ja: "喫茶雷電、いろどり市場キッチン、水音のカウンター。どこもsatsで一瞬支払い完了。",
+    },
+    spots: ["kissa-raiden", "irodori-market-kitchen", "soba-mizuoto"],
+    date: "2026-05-29",
+    likes: 96,
+    comments: [],
+    art: { hues: [260, 30], variant: "town" },
+  },
+  {
+    id: "post-4",
+    author: "Margaux D.",
+    nationality: { en: "France", ja: "フランス" },
+    kind: "itinerary",
+    themes: ["food", "heritage"],
+    title: {
+      en: "A winter onsen + yuba weekend",
+      ja: "冬の温泉と湯波の週末" ,
+    },
+    body: {
+      en: "Yumoto Onsen Ryokan for two nights, yuba kaiseki dinner, sulfur baths in falling snow. Sleep, soak, eat — repeat.",
+      ja: "湯元温泉の旅館に2泊、湯波の会席、雪の中の硫黄泉。寝て、浸かって、食べて、繰り返し。",
+    },
+    spots: ["yumoto-onsen-ryokan", "yuba-zen"],
+    date: "2026-05-20",
+    likes: 211,
+    comments: [
+      {
+        id: "c4",
+        author: "Elena P.",
+        text: "The yuba kaiseki at Zen converted me too.",
+        date: "2026-05-21",
+      },
+    ],
+    art: { hues: [25, 160], variant: "onsen" },
+  },
+];
+
+/* ------------------------------- Live data -------------------------------- */
+
+export const liveWeather: WeatherSnapshot = {
+  tempC: 19,
+  feelsC: 17,
+  humidity: 78,
+  windMs: 2,
+  condition: { en: "Partly cloudy", ja: "晴れ時々曇り" },
+  icon: "cloud",
+  updated: "2026-06-19T08:00:00+09:00",
+};
+
+export const transitDepartures: TransitDeparture[] = [
+  {
+    id: "t1",
+    line: { en: "Tōbu Bus · Chūzenji line", ja: "東武バス・中禅寺線" },
+    destination: { en: "Chūzenji Onsen", ja: "中禅寺温泉" },
+    from: { en: "Tōbu-Nikkō Stn (Bay 2A)", ja: "東武日光駅 2A乗り場" },
+    scheduled: "09:15",
+    delayMin: 0,
+    mode: "bus",
+  },
+  {
+    id: "t2",
+    line: { en: "Tōbu Bus · Yumoto line", ja: "東武バス・湯元線" },
+    destination: { en: "Yumoto Onsen", ja: "湯元温泉" },
+    from: { en: "Tōbu-Nikkō Stn (Bay 2B)", ja: "東武日光駅 2B乗り場" },
+    scheduled: "09:32",
+    delayMin: 4,
+    mode: "bus",
+  },
+  {
+    id: "t3",
+    line: { en: "JR Nikkō Line", ja: "JR日光線" },
+    destination: { en: "Utsunomiya", ja: "宇都宮" },
+    from: { en: "JR Nikkō Station", ja: "JR日光駅" },
+    scheduled: "09:48",
+    delayMin: 0,
+    mode: "train",
+  },
+  {
+    id: "t4",
+    line: { en: "City Loop Bus · World Heritage route", ja: "市内循環・世界遺産ルート" },
+    destination: { en: "Tōshōgū / Rinnōji", ja: "東照宮・輪王寺" },
+    from: { en: "Shinkyo Bridge stop", ja: "神橋バス停" },
+    scheduled: "09:21",
+    delayMin: 0,
+    mode: "bus",
+  },
+  {
+    id: "t5",
+    line: { en: "Tōbu Spacia X · Limited Express", ja: "東武スペーシアX・特急" },
+    destination: { en: "Asakusa", ja: "浅草" },
+    from: { en: "Tōbu-Nikkō Stn", ja: "東武日光駅" },
+    scheduled: "10:05",
+    delayMin: 0,
+    mode: "train",
+  },
+];
+
+export const shrineHours: ShrineHours[] = [
+  {
+    id: "toshogu",
+    name: { en: "Tōshōgū Shrine", ja: "日光東照宮" },
+    open: "08:00",
+    close: "17:00",
+    lastEntry: "16:30",
+    status: "open",
+  },
+  {
+    id: "rinnoji",
+    name: { en: "Rinnōji Temple", ja: "輪王寺" },
+    open: "08:00",
+    close: "17:00",
+    lastEntry: "16:00",
+    status: "open",
+  },
+  {
+    id: "futarasan",
+    name: { en: "Futarasan Shrine", ja: "二荒山神社" },
+    open: "08:00",
+    close: "17:00",
+    lastEntry: "16:30",
+    status: "open",
+  },
+  {
+    id: "taiyuin",
+    name: { en: "Taiyū-in Mausoleum", ja: "大猷院" },
+    open: "08:30",
+    close: "16:30",
+    lastEntry: "16:00",
+    status: "closing-soon",
+    note: {
+      en: "Roof restoration in progress on the east wing.",
+      ja: "東翼で屋根保存修理中。",
+    },
+  },
+];
+
+export const foliageReports: FoliageReport[] = [
+  {
+    id: "f1",
+    location: { en: "Irohazaka winding road", ja: "いろは坂" },
+    kind: "foliage",
+    stage: "buds",
+    forecastDays: 120,
+    note: {
+      en: "Green now — peak forecast mid-October.",
+      ja: "現在は新緑。見頃は10月中旬の予報。",
+    },
+  },
+  {
+    id: "f2",
+    location: { en: "Senjōgahara Marshland", ja: "戦場ヶ原" },
+    kind: "azalea",
+    stage: "peak",
+    forecastDays: 0,
+    note: {
+      en: "Azalea bloom at peak this week — best at sunrise.",
+      ja: "今週、ツツジが見頃。朝が一番です。",
+    },
+  },
+  {
+    id: "f3",
+    location: { en: "Kanmangafuchi Abyss", ja: "憾満ヶ淵" },
+    kind: "foliage",
+    stage: "early",
+    forecastDays: 14,
+    note: {
+      en: "Moss is at its richest after the rainy spell.",
+      ja: "梅雨明けの苔がいちばん深い緑です。",
+    },
+  },
+  {
+    id: "f4",
+    location: { en: "Yumoto Onsen forest", ja: "湯元温泉の森" },
+    kind: "foliage",
+    stage: "off",
+    forecastDays: 95,
+    note: {
+      en: "Wait for late September — larch turns gold first.",
+      ja: "9月下旬から。カラマツが先に黄金色に。",
+    },
+  },
+];
+
+export const crowdLevels: CrowdLevel[] = [
+  { id: "cl-toshogu", spot: { en: "Tōshōgū main gate", ja: "東照宮 表門" }, level: "moderate", trend: "up", waitMin: 8 },
+  { id: "cl-kegon", spot: { en: "Kegon Falls elevator", ja: "華厳の滝エレベーター" }, level: "busy", trend: "steady", waitMin: 22 },
+  { id: "cl-shinkyo", spot: { en: "Shinkyo Bridge", ja: "神橋" }, level: "quiet", trend: "steady", waitMin: 0 },
+  { id: "cl-yuba", spot: { en: "Yuba Kaiseki Zen counter", ja: "湯波会席 然 カウンター" }, level: "quiet", trend: "down", waitMin: 0 },
+  { id: "cl-chuzenji", spot: { en: "Chūzenji Onsen bus stop", ja: "中禅寺温泉バス停" }, level: "packed", trend: "up", waitMin: 35 },
+];
+
+export const localEvents: LocalEvent[] = [
+  {
+    id: "ev-firefly",
+    name: { en: "Kanmangafuchi Firefly Nights", ja: "憾満ヶ淵ホタル観賞会" },
+    where: { en: "Kanmangafuchi riverside", ja: "憾満ヶ淵 川沿い" },
+    start: "2026-06-20T19:30:00+09:00",
+    end: "2026-07-12T21:30:00+09:00",
+    description: {
+      en: "Guided low-light walks; walking visitors only to protect the gorge.",
+      ja: "低照度ガイドウォーク。渓谷保護のため徒歩来場者限定。",
+    },
+    themes: ["nature"],
+  },
+  {
+    id: "ev-ferry",
+    name: { en: "Chūzenji Sunset Electric Ferry", ja: "中禅寺湖 夕暮れ電動遊覧船" },
+    where: { en: "Lake Chūzenji pier", ja: "中禅寺湖 桟橋" },
+    start: "2026-06-15T17:30:00+09:00",
+    end: "2026-08-31T19:30:00+09:00",
+    description: {
+      en: "Extra sunset service added through August.",
+      ja: "8月までサンセット便を増便。",
+    },
+    themes: ["nature"],
+  },
+  {
+    id: "ev-shrine-night",
+    name: { en: "Tōshōgū Lantern Evening", ja: "東照宮 灯篭の夕べ" },
+    where: { en: "Tōshōgū Yōmeimon", ja: "東照宮 陽明門" },
+    start: "2026-07-04T18:30:00+09:00",
+    end: "2026-07-04T21:00:00+09:00",
+    description: {
+      en: "Once-a-year candle-lit opening of the Yōmeimon precinct.",
+      ja: "年に一度、陽明門境内のろうそく特別拝観。",
+    },
+    themes: ["heritage"],
+  },
+  {
+    id: "ev-yuba-market",
+    name: { en: "Yuba & Soba Open Market", ja: "湯波とそば 青空市" },
+    where: { en: "Imaichi market square", ja: "今市 市場広場" },
+    start: "2026-06-22T08:00:00+09:00",
+    end: "2026-06-22T13:00:00+09:00",
+    description: {
+      en: "Tasting stalls from 14 producers — Lightning accepted at most.",
+      ja: "生産者14店の試食市。多くがライトニング決済対応。",
+    },
+    themes: ["food"],
+  },
 ];
