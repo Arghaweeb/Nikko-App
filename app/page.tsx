@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Bolt, CalendarDays, CloudSun, Droplets, Leaf, Megaphone, Wind } from "lucide-react";
+import { ArrowRight, Bolt, CalendarDays, CloudSun, Droplets, Heart, Leaf, Megaphone, Radio, UsersRound, Wind } from "lucide-react";
 import { useApp } from "@/lib/providers";
 import { attractions, announcements, badges, experiences, promotions } from "@/lib/data";
 import { fmt, satsToJpy } from "@/services/rates";
@@ -13,7 +13,7 @@ import { ScenicArt } from "@/components/ScenicArt";
 import { ThemePicker } from "@/components/ThemePicker";
 
 export default function HomePage() {
-  const { t, lang, theme, sats, coin, eco, reservations } = useApp();
+  const { t, lang, theme, sats, coin, eco, reservations, posts } = useApp();
 
   const recommended = attractions.filter((a) => a.themes.includes(theme)).slice(0, 3);
   const nearby = experiences.filter((e) => e.themes.includes(theme)).slice(0, 2);
@@ -94,7 +94,15 @@ export default function HomePage() {
       {/* Weather + announcements */}
       <section className="grid gap-4 md:grid-cols-2">
         <div className="card p-5">
-          <SectionTitle eyebrow={t("home.weather.now")} title={t("home.weather")} />
+          <SectionTitle
+            eyebrow={t("home.weather.now")}
+            title={t("home.weather")}
+            action={
+              <Link href="/live" className="flex items-center gap-1 text-sm font-medium text-forest-700 hover:underline dark:text-gold-300">
+                <Radio size={14} /> {t("live.openLive")}
+              </Link>
+            }
+          />
           <div className="flex items-center gap-5">
             <CloudSun size={52} className="text-gold-400" strokeWidth={1.4} />
             <div>
@@ -156,6 +164,38 @@ export default function HomePage() {
                 </div>
               </Link>
             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Community highlights */}
+      <section>
+        <SectionTitle
+          eyebrow={t("community.subtitle")}
+          title={t("community.feed")}
+          action={
+            <Link href="/community" className="flex items-center gap-1 text-sm font-medium text-forest-700 hover:underline dark:text-gold-300">
+              <UsersRound size={14} /> {t("home.viewAll")} <ArrowRight size={14} />
+            </Link>
+          }
+        />
+        <div className="grid gap-3 sm:grid-cols-2">
+          {posts.slice(0, 2).map((p) => (
+            <Link
+              key={p.id}
+              href={`/community#${p.id}`}
+              className="card group block p-4 transition hover:shadow-lift"
+            >
+              <div className="text-xs text-ink-soft dark:text-beige-200/70">
+                <span className="font-medium text-ink dark:text-beige-50/90">{p.author}</span>
+                <span> · {formatDate(p.date, lang)}</span>
+              </div>
+              <h3 className="mt-1 line-clamp-1 font-display text-base font-semibold">{L(p.title, lang)}</h3>
+              <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-ink-soft dark:text-beige-200/70">{L(p.body, lang)}</p>
+              <div className="mt-2 flex items-center gap-1 text-xs text-ink-soft dark:text-beige-200/60">
+                <Heart size={11} /> {p.likes}
+              </div>
+            </Link>
           ))}
         </div>
       </section>

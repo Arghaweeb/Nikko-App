@@ -10,9 +10,11 @@ import {
   Home,
   Languages,
   Moon,
+  Radio,
   Sparkles,
   Sun,
   UserRound,
+  UsersRound,
   UtensilsCrossed,
   Wallet,
   BedDouble,
@@ -24,9 +26,11 @@ import { SalamanderFigure } from "@/components/Mascot";
 const links = [
   { href: "/", key: "nav.home", icon: Home },
   { href: "/explore", key: "nav.explore", icon: Compass },
+  { href: "/live", key: "nav.live", icon: Radio },
   { href: "/experiences", key: "nav.experiences", icon: Sparkles },
   { href: "/hotels", key: "nav.hotels", icon: BedDouble },
   { href: "/restaurants", key: "nav.restaurants", icon: UtensilsCrossed },
+  { href: "/community", key: "nav.community", icon: UsersRound },
   { href: "/wallet", key: "nav.wallet", icon: Wallet },
   { href: "/rewards", key: "nav.rewards", icon: Award },
   { href: "/profile", key: "nav.profile", icon: UserRound },
@@ -97,7 +101,7 @@ export function TopNav() {
 export function BottomNav() {
   const { t } = useApp();
   const pathname = usePathname();
-  const mobileLinks = links.filter((l) => ["/", "/explore", "/hotels", "/wallet", "/rewards"].includes(l.href));
+  const mobileLinks = links.filter((l) => ["/", "/explore", "/live", "/community", "/wallet"].includes(l.href));
 
   return (
     <nav

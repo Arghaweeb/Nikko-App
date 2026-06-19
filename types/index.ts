@@ -113,3 +113,99 @@ export interface RedeemOption {
   cost: number; // Nikko Coin
   kind: Localized;
 }
+
+/* --------------------------------- Social --------------------------------- */
+
+export type SocialKind = "itinerary" | "photo" | "tip";
+
+export interface SocialComment {
+  id: string;
+  author: string;
+  text: string;
+  date: string;
+}
+
+export interface SocialPost {
+  id: string;
+  author: string;
+  nationality?: Localized;
+  kind: SocialKind;
+  themes: TourismTheme[];
+  title: Localized;
+  body: Localized;
+  /** referenced attraction / experience / hotel / restaurant ids */
+  spots: string[];
+  date: string;
+  likes: number;
+  comments: SocialComment[];
+  art: ArtSpec;
+}
+
+/* ------------------------------- Live data -------------------------------- */
+
+export interface WeatherSnapshot {
+  tempC: number;
+  feelsC: number;
+  humidity: number;
+  windMs: number;
+  condition: Localized;
+  icon: "sun" | "cloud" | "rain" | "snow" | "fog";
+  updated: string;
+}
+
+export interface TransitDeparture {
+  id: string;
+  line: Localized;
+  destination: Localized;
+  from: Localized;
+  scheduled: string; // HH:mm
+  delayMin: number;
+  mode: "bus" | "train";
+}
+
+export interface ShrineHours {
+  id: string;
+  name: Localized;
+  open: string;
+  close: string;
+  lastEntry: string;
+  status: "open" | "closing-soon" | "closed";
+  note?: Localized;
+}
+
+export type FoliageStage =
+  | "buds"
+  | "early"
+  | "peak"
+  | "late"
+  | "off"
+  | "blossom-early"
+  | "blossom-peak"
+  | "blossom-late";
+
+export interface FoliageReport {
+  id: string;
+  location: Localized;
+  kind: "foliage" | "cherry" | "azalea" | "snow";
+  stage: FoliageStage;
+  forecastDays: number;
+  note: Localized;
+}
+
+export interface CrowdLevel {
+  id: string;
+  spot: Localized;
+  level: "quiet" | "moderate" | "busy" | "packed";
+  trend: "up" | "down" | "steady";
+  waitMin: number;
+}
+
+export interface LocalEvent {
+  id: string;
+  name: Localized;
+  where: Localized;
+  start: string; // ISO
+  end: string; // ISO
+  description: Localized;
+  themes: TourismTheme[];
+}
