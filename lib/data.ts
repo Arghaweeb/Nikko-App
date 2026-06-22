@@ -40,7 +40,7 @@ export const hotels: Hotel[] = [
     earnRate: 320,
     art: { hues: [205, 150], variant: "bridge" },
     bookingLinks: [
-      { label: "Official Website", url: "https://www.nikko-kanaya-hotel.co.jp/" },
+      { label: "Official Website", url: "https://www.kanayahotel.co.jp/en/nkh/" },
       { label: "Booking.com", url: "https://www.booking.com/" },
       { label: "Rakuten Travel", url: "https://travel.rakuten.co.jp/" },
       { label: "Jalan", url: "https://www.jalan.net/" },
@@ -216,7 +216,7 @@ export const restaurants: Restaurant[] = [
     art: { hues: [95, 45], variant: "town" },
     reserveLinks: [
       { label: "Official Website", url: "https://www.nikko-kankou.org/" },
-      { label: "Reservation inquiry", url: "https://www.nikko-kankou.org/contact/" },
+      { label: "Reservation inquiry", url: "https://www.visitnikko.jp/en/plan-your-trip/tourist-information/" },
     ],
     reviews: [
       {

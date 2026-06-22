@@ -1,0 +1,127 @@
+
+> nikko-passport@0.1.0 dev
+> cross-env NODE_OPTIONS=--max-old-space-size=4096 next dev
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.101:3000
+
+ ✓ Starting...
+ ✓ Ready in 6s
+ ○ Compiling / ...
+ ✓ Compiled / in 72.1s (1446 modules)
+ GET / 200 in 1130ms
+ ✓ Compiled in 12.2s (651 modules)
+ GET / 200 in 643ms
+ GET / 200 in 1250ms
+ ○ Compiling /explore ...
+ ✓ Compiled /explore in 8.5s (1429 modules)
+ GET /explore 200 in 14379ms
+ ○ Compiling /explore/[id] ...
+ ✓ Compiled /explore/[id] in 5s (1458 modules)
+ GET /explore/kegon-falls 200 in 12850ms
+ GET /explore/toshogu 200 in 456ms
+ GET /explore/lake-chuzenji 200 in 617ms
+ GET /explore/senjogahara 200 in 597ms
+ GET /explore/rinnoji 200 in 610ms
+ GET /explore/kanmangafuchi 200 in 635ms
+ ○ Compiling /hotels ...
+ ✓ Compiled /hotels in 1911ms (1469 modules)
+ GET /hotels 200 in 3638ms
+ ○ Compiling /hotels/[id] ...
+ ✓ Compiled /hotels/[id] in 1936ms (1483 modules)
+ GET /hotels/kanaya-heritage 200 in 6999ms
+ GET /hotels/chuzenji-lakeside 200 in 628ms
+ GET /hotels/yumoto-onsen-ryokan 200 in 624ms
+ GET /hotels/satoyama-machiya 200 in 641ms
+ ○ Compiling /restaurants ...
+ ✓ Compiled /restaurants in 1932ms (1492 modules)
+ GET /restaurants 200 in 3311ms
+ ○ Compiling /restaurants/[id] ...
+ ✓ Compiled /restaurants/[id] in 1692ms (1504 modules)
+ GET /restaurants/soba-mizuoto 200 in 5191ms
+ GET /restaurants/yuba-zen 200 in 481ms
+ GET /restaurants/irodori-market-kitchen 200 in 517ms
+ GET /restaurants/kissa-raiden 200 in 690ms
+ ○ Compiling /experiences ...
+ ✓ Compiled /experiences in 2.7s (1515 modules)
+ GET /experiences 200 in 3933ms
+ ○ Compiling /profile ...
+ ✓ Compiled /profile in 1800ms (1528 modules)
+ GET /profile 200 in 2956ms
+ ○ Compiling /wallet ...
+ ✓ Compiled /wallet in 2.6s (1551 modules)
+ GET /wallet 200 in 3707ms
+ ○ Compiling /rewards ...
+ ✓ Compiled /rewards in 2.7s (1558 modules)
+ GET /rewards 200 in 4178ms
+ ○ Compiling /community ...
+ ✓ Compiled /community in 2.4s (1576 modules)
+ GET /community 200 in 3746ms
+ ○ Compiling /live ...
+ ✓ Compiled /live in 2.4s (1593 modules)
+ GET /live 200 in 3750ms
+ GET /live 200 in 2619ms
+ ✓ Compiled in 12.5s (1559 modules)
+ ○ Compiling /experiences/[id] ...
+ ✓ Compiled /experiences/[id] in 5.9s (1559 modules)
+ GET /experiences/dawn-kayak 200 in 16759ms
+ GET /experiences/dawn-kayak 200 in 514ms
+ GET /experiences/cedar-walk 200 in 587ms
+ GET /experiences/yuba-workshop 200 in 624ms
+ GET /experiences/goshuin-trail 200 in 608ms
+ GET /experiences/marsh-birding 200 in 810ms
+ GET /experiences/market-breakfast 200 in 676ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1227ms (848 modules)
+ GET / 200 in 2915ms
+ ○ Compiling /explore ...
+ ✓ Compiled /explore in 1256ms (857 modules)
+ GET /explore 200 in 2847ms
+ ○ Compiling /hotels ...
+ ✓ Compiled /hotels in 1205ms (864 modules)
+ GET /hotels 200 in 2736ms
+ ○ Compiling /restaurants ...
+ ✓ Compiled /restaurants in 2.3s (862 modules)
+ GET /restaurants 200 in 3913ms
+ ○ Compiling /experiences ...
+ ✓ Compiled /experiences in 1540ms (854 modules)
+ GET /experiences 200 in 3343ms
+ ○ Compiling /community ...
+ ✓ Compiled /community in 7.2s (864 modules)
+ GET /community 200 in 10799ms
+ GET /live 200 in 1354ms
+ ○ Compiling /wallet ...
+ ✓ Compiled /wallet in 2.7s (867 modules)
+ GET /wallet 200 in 5265ms
+ ○ Compiling /rewards ...
+ ✓ Compiled /rewards in 5.8s (879 modules)
+ GET /rewards 200 in 8472ms
+ ○ Compiling /profile ...
+ ✓ Compiled /profile in 1846ms (887 modules)
+ GET /profile 200 in 3376ms
+ ○ Compiling /hotels/[id] ...
+ ✓ Compiled /hotels/[id] in 1420ms (895 modules)
+ GET /hotels/kanaya-heritage 200 in 3168ms
+ ○ Compiling /restaurants/[id] ...
+ ✓ Compiled /restaurants/[id] in 1647ms (903 modules)
+ GET /restaurants/soba-mizuoto 200 in 3483ms
+ GET /experiences/dawn-kayak 200 in 572ms
+ GET /explore 200 in 883ms
+ ✓ Compiled in 7.5s (1542 modules)
+ GET /explore 200 in 2351ms
+ GET /explore 200 in 4798ms
+ ○ Compiling /hotels/[id] ...
+ ✓ Compiled /hotels/[id] in 1393ms (833 modules)
+ GET /explore 200 in 2085ms
+ GET /hotels/kanaya-heritage 200 in 3793ms
+ GET /hotels/chuzenji-lakeside 200 in 827ms
+ GET /hotels/yumoto-onsen-ryokan 200 in 1861ms
+ GET /hotels/satoyama-machiya 200 in 773ms
+ ○ Compiling /restaurants/[id] ...
+ ✓ Compiled /restaurants/[id] in 926ms (841 modules)
+ GET /restaurants/soba-mizuoto 200 in 2509ms
+ GET /restaurants/yuba-zen 200 in 552ms
+ GET /restaurants/irodori-market-kitchen 200 in 587ms
+ GET /restaurants/kissa-raiden 200 in 879ms
+ ✓ Compiled in 3.2s (1570 modules)

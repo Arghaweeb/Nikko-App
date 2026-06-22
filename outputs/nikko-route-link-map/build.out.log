@@ -1,0 +1,59 @@
+
+> nikko-passport@0.1.0 build
+> cross-env NODE_OPTIONS=--max-old-space-size=4096 next build
+
+   ▲ Next.js 15.5.19
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 15.7s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/33) ...
+   Generating static pages (8/33) 
+   Generating static pages (16/33) 
+   Generating static pages (24/33) 
+ ✓ Generating static pages (33/33)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                   Size  First Load JS
+┌ ○ /                                      4.62 kB         173 kB
+├ ○ /_not-found                              123 B         103 kB
+├ ○ /community                             3.43 kB         172 kB
+├ ○ /experiences                           2.44 kB         167 kB
+├ ● /experiences/[id]                        725 B         133 kB
+├   ├ /experiences/dawn-kayak
+├   ├ /experiences/cedar-walk
+├   ├ /experiences/yuba-workshop
+├   └ [+3 more paths]
+├ ○ /explore                               3.51 kB         172 kB
+├ ● /explore/[id]                          2.02 kB         170 kB
+├   ├ /explore/kegon-falls
+├   ├ /explore/toshogu
+├   ├ /explore/lake-chuzenji
+├   └ [+3 more paths]
+├ ○ /hotels                                3.35 kB         172 kB
+├ ● /hotels/[id]                           1.73 kB         170 kB
+├   ├ /hotels/kanaya-heritage
+├   ├ /hotels/chuzenji-lakeside
+├   ├ /hotels/yumoto-onsen-ryokan
+├   └ /hotels/satoyama-machiya
+├ ○ /live                                  5.74 kB         171 kB
+├ ○ /profile                               8.09 kB         169 kB
+├ ○ /restaurants                           1.38 kB         170 kB
+├ ● /restaurants/[id]                      2.03 kB         170 kB
+├   ├ /restaurants/soba-mizuoto
+├   ├ /restaurants/yuba-zen
+├   ├ /restaurants/irodori-market-kitchen
+├   └ /restaurants/kissa-raiden
+├ ○ /rewards                               5.05 kB         166 kB
+└ ○ /wallet                                7.11 kB         169 kB
++ First Load JS shared by all               102 kB
+  ├ chunks/493-dbd4607ff9cca169.js         46.2 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js    54.2 kB
+  └ other shared chunks (total)            2.01 kB
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+
