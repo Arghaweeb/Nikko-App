@@ -5,3 +5,9 @@ out/
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+# Visual Studio
+.vs/
+
+# Generated outputs
+outputs/
+
