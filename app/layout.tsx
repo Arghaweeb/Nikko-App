@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Shippori_Mincho, Zen_Kaku_Gothic_New } from "next/font/google";
-import "@/styles/globals.css";
+// @ts-ignore: side-effect import for global styles
+import "../styles/globals.css";
 import { AppProvider } from "@/lib/providers";
 import { BottomNav, TopNav } from "@/components/Navbar";
 import { MascotAssistant } from "@/components/Mascot";
 import { PageMascot } from "@/components/PageMascot";
+import { ChatWidget } from "@/components/ChatWidget";
+
 
 const displayFont = Shippori_Mincho({
   subsets: ["latin"],
@@ -45,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="mx-auto max-w-6xl px-4 pb-24 pt-6 xl:pb-12">{children}</main>
           <MascotAssistant />
           <PageMascot />
+          <ChatWidget />
           <BottomNav />
         </AppProvider>
       </body>

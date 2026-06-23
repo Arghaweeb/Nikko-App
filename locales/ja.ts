@@ -254,6 +254,12 @@ const ja: Dict = {
   "live.updated": "更新",
   "live.openLive": "ライブ日光を開く",
   "live.days": "日後",
+
+  "chat.title": "おくにっこちゃんに聞く",
+  "chat.open": "チャットアシスタントを開く",
+  "chat.placeholder": "日光やアプリについて何でも…",
+  "chat.welcome": "こんにちは！おくにっこちゃんです。日光のことやアプリの使い方、何でも聞いてください。",
+  "chat.error": "申し訳ありません。アシスタントに接続できませんでした。もう一度お試しください。",
 };
 
 export default ja;

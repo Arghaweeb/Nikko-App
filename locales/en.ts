@@ -268,6 +268,12 @@ const en = {
   "live.updated": "Updated",
   "live.openLive": "Open Live Nikko",
   "live.days": "days",
+
+  "chat.title": "Ask Okunikko-chan",
+  "chat.open": "Open chat assistant",
+  "chat.placeholder": "Ask about Nikko or the app…",
+  "chat.welcome": "Hi! I'm Okunikko-chan. Ask me anything about Nikko or how to use the app.",
+  "chat.error": "Sorry — I couldn't reach the assistant. Please try again.",
 };
 
 export default en;
